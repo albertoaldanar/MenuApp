@@ -2,6 +2,7 @@ import { SET_MENU_DATA } from "../actions/menuActions";
 
 const initialState = {
   menus: [],
+  menuIsLoading: false
 };
 
 export default function (state = initialState, action) {
