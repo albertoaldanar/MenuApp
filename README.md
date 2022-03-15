@@ -12,10 +12,11 @@ Demo video:
 Installation:
 
 	npm install
-
+	
 Run the project:
-  - This react native App was created with expo. In order to run the project you need to have expo installed if you don’t have it, run npm install --global expo-cli.
-  - Run expo start and choose the platform in which you want to run de project (iOS, Android or web).
+
+	expo start
+- This react native App was created with expo. In order to run the project you need to have expo installed if you don’t have it, run: npm install --global expo-cli.
 	
 Run tests:
 
