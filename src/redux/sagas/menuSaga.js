@@ -1,22 +1,19 @@
-import { call, put, takeEvery, fork } from 'redux-saga/effects'
-import API from '../../apis/menuApi';
+import { call, put, takeLatest } from "redux-saga/effects";
+import { getMenu } from "../../apis/menuApi";
+import { FETCH_MENU_DATA, SET_MENU_DATA } from "../actions/menuActions";
 
-// // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* getMenu() {
-   console.log("MENUUUUUUUU")
-   try {
-      const menu = yield call(API.getMenu());
-      console.log("esto es menu", menu)
-      yield put({type: "SET_MENU_DATA", menus: menu});
-   } catch (e) {
+function* getMenuData() {
+  try {
+    const menu = yield call(getMenu);
+    yield put({ type: SET_MENU_DATA, payload: menu });
+  } catch (e) {
     //   yield put({type: "USER_FETCH_FAILED", message: e.message});
-    console.log(e)
-   }
+    console.log(e);
+  }
 }
 
 function* menuSaga() {
-   console.log('aquiii es my saga')
-   yield takeEvery("FETCH_MENU_DATA", getMenu)
+  yield takeLatest(FETCH_MENU_DATA, getMenuData);
 }
 
 export default menuSaga;

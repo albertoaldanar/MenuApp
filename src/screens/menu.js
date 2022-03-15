@@ -5,37 +5,25 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  BackHandler
 } from "react-native";
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import MockData from "../mock.json";
-import { fetchMenuData } from "../redux/actions/menuActions";
+import { useSelector } from 'react-redux';
 import Header from "../components/header";
 import MenuItem from "../components/menuItem";
-import API from '../apis/menuApi';
 
 function Menu(props) {
   const [menuSectionSelected, setMenuSectionSelected] = useState(0);
   const menuSectionListRef = useRef(null);
-  const menuList = MockData.result.menus[0].menu_sections;
-  const restaurantName = MockData.result.restaurant_name;
+  const menuData = useSelector(state => state.menuData);
+  const menuList = menuData.result.menus[0].menu_sections;
+  const restaurantName = menuData.result.restaurant_name;
 
   useEffect(() => {
-    // getMenus()
-  }, [])
-
-
-  async function getMenus(){
-    try {
-      const notifResponse = await API.getMenu();
-
-      console.log("data response", notifResponse)
-        
-  } catch (err) {
-          console.log("error =>", err);
-
-  }
-  }
+    if(Platform.OS == "android"){
+      const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
+      return () => backHandler.remove()
+    }
+  }, []);
 
   const onSelectMenuSection = (section) => {
     setMenuSectionSelected(section);
@@ -67,8 +55,6 @@ function Menu(props) {
       <MenuItem menuItem={item} />
     </View>
   );
-
-  console.log("selected", menuSectionSelected);
 
   return (
     <View style={styles.container}>
@@ -103,48 +89,34 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.7,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 0,
+    height: 80
   },
   flatListContainers: {
     marginTop: 20,
   },
   flatListMenuContainer: {
-    marginBottom: "60%",
-    marginTop: 20,
+    marginBottom: '60%'
   },
   sectionListTitle: {
     textTransform: "uppercase",
     letterSpacing: 0.6,
-    padding: 20,
     fontFamily: "Montserrat",
     fontSize: 13,
     color: "gray",
+    marginTop: 20
   },
   sectionListSelectedTitle: {
     textTransform: "uppercase",
     letterSpacing: 0.6,
     textDecorationLine: "underline",
-    padding: 20,
     fontFamily: "Montserrat",
     color: "black",
+    marginTop: 20
   },
   menuSelectedContainer: {
     alignItems: "center",
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    menuData: state.menuData,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchMenuData: (object) => dispatch(fetchMenuData(object)),
-});
-
-
-Menu.propTypes = {
-  menuData: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;

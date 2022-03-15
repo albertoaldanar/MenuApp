@@ -9,9 +9,7 @@ export function changeMenuData(object) {
 }
 
 export function fetchMenuData(){
-  console.log("llego aqui")
   return {
     type: FETCH_MENU_DATA,
   };
-
 }

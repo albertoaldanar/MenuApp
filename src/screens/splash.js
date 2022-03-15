@@ -1,11 +1,35 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Platform,
+  BackHandler,
+} from "react-native";
+import { useDispatch } from "react-redux";
+import { fetchMenuData } from "../redux/actions/menuActions";
 import MenuLoadingImage from "../assets/images/menuLoading.gif";
 
 function Splash(props) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    navigateToMenu();
+    if (Platform.OS == "android") {
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        () => true
+      );
+      return () => backHandler.remove();
+    }
+
+    callMenuData();
   }, []);
+
+  function callMenuData() {
+    dispatch(fetchMenuData());
+    navigateToMenu();
+  }
 
   function navigateToMenu() {
     setTimeout(() => {

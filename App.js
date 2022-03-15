@@ -1,6 +1,7 @@
 import MenuAppNavigation from "./src/navigation/navigation";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import 'react-native-gesture-handler';
 import { useFonts } from "expo-font";
 
 export default function App() {

@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 40,
     letterSpacing: 0.8,
-    fontWeight: "bold",
     fontFamily: "Montserrat",
   },
 });
