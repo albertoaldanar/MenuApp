@@ -1,4 +1,3 @@
-import { FlatList } from "react-native";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { Provider } from "react-redux";
@@ -26,10 +25,6 @@ describe("<Menu />", () => {
   });
   it("Menu component is defined", () => {
     expect(wrapper).toBeDefined();
-  });
-
-  it("Menu screen renders two Flatlist elemnts correctly", () => {
-    expect(wrapper.find(FlatList)).toHaveLength(2);
   });
 
   it("Menu snapshot test", () => {

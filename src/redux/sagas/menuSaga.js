@@ -5,10 +5,9 @@ import { FETCH_MENU_DATA, SET_MENU_DATA } from "../actions/menuActions";
 function* getMenuData() {
   try {
     const menu = yield call(getMenu);
-    yield put({ type: SET_MENU_DATA, payload: menu });
+    yield put({ type: SET_MENU_DATA, payload: menu});
   } catch (e) {
-    //   yield put({type: "USER_FETCH_FAILED", message: e.message});
-    console.log(e);
+    console.log('error', e);
   }
 }
 

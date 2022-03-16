@@ -8,7 +8,7 @@ async function getMenu() {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "X-API-KEY": "c3ba8c2613d3988d3329f116ad27ab82",
+      "X-API-KEY": "756c68d8b08b17a4edafe28a263fded6",
     },
   };
 
@@ -24,4 +24,5 @@ async function getMenu() {
     console.log("error", error);
   }
 }
+
 export { getMenu };

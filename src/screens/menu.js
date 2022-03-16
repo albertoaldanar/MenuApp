@@ -5,23 +5,26 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
 } from "react-native";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Header from "../components/header";
 import MenuItem from "../components/menuItem";
 
 function Menu(props) {
   const [menuSectionSelected, setMenuSectionSelected] = useState(0);
   const menuSectionListRef = useRef(null);
-  const menuData = useSelector(state => state.menuData);
+  const menuData = useSelector((state) => state.menuData);
   const menuList = menuData.result.menus[0].menu_sections;
   const restaurantName = menuData.result.restaurant_name;
 
   useEffect(() => {
-    if(Platform.OS == "android"){
-      const backHandler = BackHandler.addEventListener('hardwareBackPress', () => true)
-      return () => backHandler.remove()
+    if (Platform.OS == "android") {
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        () => true
+      );
+      return () => backHandler.remove();
     }
   }, []);
 
@@ -90,13 +93,13 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 0,
-    height: 80
+    height: 80,
   },
   flatListContainers: {
     marginTop: 20,
   },
   flatListMenuContainer: {
-    marginBottom: '60%'
+    marginBottom: "60%",
   },
   sectionListTitle: {
     textTransform: "uppercase",
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontSize: 13,
     color: "gray",
-    marginTop: 20
+    marginTop: 20,
   },
   sectionListSelectedTitle: {
     textTransform: "uppercase",
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     fontFamily: "Montserrat",
     color: "black",
-    marginTop: 20
+    marginTop: 20,
   },
   menuSelectedContainer: {
     alignItems: "center",

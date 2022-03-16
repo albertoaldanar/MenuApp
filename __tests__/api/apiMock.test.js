@@ -1,23 +1,7 @@
-import { getMenu } from '../../src/apis/menuApi';
+import { getMenu } from "../../src/apis/menuApi";
+import { enableFetchMocks } from "jest-fetch-mock";
 
-global.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve()
-}));
-
-describe('"Get menu API', () => {
-
-    let menuResponse
-    beforeEach(async () => {
-        const menuRespons = await getMenu();
-        console.log(menuRespons, 'ESTOOOOO')
-    });
-
-    it('Then the correct average should be returned', () => {
-
-        async () => {
-            const menuRespons = await getMenu();
-            console.log(menuRespons, 'ESTOOOOO')
-        }
-
-    });
+it("API menu response correctly", async () => {
+  let menu = await getMenu();
+  expect(menu).toHaveProperty("result");
 });
